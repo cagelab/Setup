@@ -1,32 +1,10 @@
 ---
-- name: Check Local API cogmoteGO Status
+- name: Check cogmoteGO API Status
   hosts: all
-  gather_facts: false
+  gather_facts: true
+  ignore_unreachable: false
 
   tasks:
-    - name: Check SSH connectivity (skip host if unreachable)
-      ansible.builtin.wait_for_connection:
-        timeout: 2
-      register: conn_check
-      ignore_errors: true
-      changed_when: false
-      retries: 0
-      until: false
-
-    - name: Set can_connect fact
-      ansible.builtin.set_fact:
-        can_connect: "{{ conn_check is not failed }}"
-
-    - name: Record unreachable hosts
-      ansible.builtin.add_host:
-        name: "{{ inventory_hostname }}"
-        groups: unreachable_hosts
-      when: not can_connect | bool
-
-    - name: Stop processing unreachable hosts
-      ansible.builtin.meta: end_host
-      when: not can_connect | bool
-
     - name: Query cogmoteGO API status endpoint
       ansible.builtin.uri:
         url: http://localhost:9012/api/status
@@ -61,15 +39,3 @@
         - is_running | bool
         - default_data_response.json is defined
         - default_data_response.json | length > 0
-
-    - name: Report unreachable hosts (controller)
-      ansible.builtin.debug:
-        msg: >-
-          Unreachable hosts: {{
-            (groups['unreachable_hosts'] | default([]) | join(', '))
-            if (groups['unreachable_hosts'] | default([]) | length > 0)
-            else 'none'
-          }}
-      run_once: true
-      delegate_to: localhost
-

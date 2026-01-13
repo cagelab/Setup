@@ -27,11 +27,7 @@ Rules for automated changes and contributions in this repo, focusing on:
 - [bootstrap.sh](bootstrap.sh) — for initial bootstrap of tools and packages necessary for CageLab: https://github.com/cagelab/CageLab 
 - [makelinks.sh](makelinks.sh) — a script to ensure scripts and services are symlinked into the correct locations. Should be run every time any files change.
 
-## Formatting rules
-
-- Prefer **tabs** for indentation in code and scripts.
-- **Exception:** YAML files (`*.yml`, `*.yaml`) must use **spaces** (2 spaces).
-- Keep lines reasonably short (aim ~80 chars when practical).
+€€€
 
 ## zsh script rules (`*.sh`, `*.zsh`)
 
