@@ -3,7 +3,8 @@
 - name: Update CageLab Software
   hosts: "{{ target | default('cagelab') }}"
   gather_facts: true
-  ignore_unreachable: true
+  gather_timeout: 10
+  ignore_unreachable: false
 
   vars:
     cogmotego_install_script_url: "https://raw.githubusercontent.com/cagelab/cogmoteGO/main/install.sh"
@@ -17,6 +18,7 @@
       - { path: "~/Code/PTBSimia", url: "https://gitee.com/CogPlatform/PTBSimia.git" }
       - { path: "~/Code/matlab-jzmq", url: "https://gitee.com/CogPlatform/matlab-jzmq.git" }
       - { path: "~/Code/PacmanTask", url: "https://gitee.com/CogPlatform/PacmanTask.git" }
+      - { path: "~/.dotfiles", url: "https://codeberg.org/iandol/dotfiles.git" }
 
   tasks:
 
