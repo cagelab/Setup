@@ -25,7 +25,10 @@
 
     - name: Install i3
       ansible.builtin.apt:
-        name: i3
+        name:
+          - i3
+          - nitrogen
+          - rofi
         state: present
 
     - name: Upgrade all packages

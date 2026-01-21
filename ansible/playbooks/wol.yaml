@@ -1,0 +1,33 @@
+---
+- name: Wake on LAN
+  hosts: localhost
+  connection: local
+  gather_facts: true  # Gather facts to check OS family for package installation
+  vars:
+    # Default to waking all hosts, can be overridden with -e "wol_group=cagelab"
+    wol_group: all
+
+  tasks:
+    - name: Ensure wakeonlan is installed (Ubuntu/Debian)
+      ansible.builtin.apt:
+        name: wakeonlan
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+      become: true
+      ignore_errors: true # Fail gracefully if not on Debian/Ubuntu or no sudo rights
+
+    - name: Send Wake-on-LAN magic packet
+      ansible.builtin.command:
+        cmd: "wakeonlan {{ hostvars[item]['mac_address'] }}"
+      loop: "{{ groups[wol_group] }}"
+      when: 
+        - hostvars[item]['mac_address'] is defined
+      register: wol_result
+      changed_when: wol_result.rc == 0
+
+    - name: Report missing MAC addresses
+      ansible.builtin.debug:
+        msg: "Skipping {{ item }}: No 'mac_address' variable defined in inventory."
+      loop: "{{ groups[wol_group] }}"
+      when: hostvars[item]['mac_address'] is not defined

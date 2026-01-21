@@ -1,20 +1,3 @@
----
-post_title: "AGENTS: for CageLab setup"
-author1: "Ian"
-post_slug: "agents-repo-rules"
-microsoft_alias: "unknown"
-featured_image: ""
-categories:
-  - devops
-  - documentation
-tags:
-  - zsh
-  - ansible
-  - automation
-summary: "Conventions for zsh scripts and Ansible content in this repository."
-post_date: "2026-01-04"
----
-
 ## Scope
 
 Rules for automated changes and contributions in this repo, focusing on:
@@ -26,8 +9,6 @@ Rules for automated changes and contributions in this repo, focusing on:
 
 - [bootstrap.sh](bootstrap.sh) — for initial bootstrap of tools and packages necessary for CageLab: https://github.com/cagelab/CageLab 
 - [makelinks.sh](makelinks.sh) — a script to ensure scripts and services are symlinked into the correct locations. Should be run every time any files change.
-
-€€€
 
 ## zsh script rules (`*.sh`, `*.zsh`)
 
