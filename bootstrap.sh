@@ -93,7 +93,11 @@ if [ "$PLATFORM" = "Linux" ]; then
 	sudo apt -my install wakeonlan etherwake xdotool
 	sudo apt -my install python3-pip python3-venv
 
-	# Install some snap packages
+	# get i3 desktop manager
+	"$SPATH/config/geti3.sh"
+
+	# Install snap packages
+	[[ ! -f $(which vlc) ]] && sudo snap install vlc
 	[[ ! -f $(which code) ]] && sudo snap install --classic code
 
 	# flatpak
@@ -109,14 +113,14 @@ curl -sS https://raw.githubusercontent.com/Ccccraz/cogmoteGO/main/install.sh | s
 
 #=============================================== Install NoMachine
 [[ ! -f /usr/NX/bin/nxd ]] && 
-	curl -L -o $HOME/Downloads/nomachine.deb https://web9001.nomachine.com/download/9.2/Linux/nomachine_9.2.18_3_amd64.deb &&
+	curl -L -o $HOME/Downloads/nomachine.deb https://web9001.nomachine.com/download/9.3/Linux/nomachine_9.3.7_1_amd64.deb &&
 	sudo dpkg -i $HOME/Downloads/nomachine.deb
 
 #=============================================== Install eget and get mediamtx and sunshine
 [[ ! -f /usr/local/bin/eget ]] && curl https://zyedidia.github.io/eget.sh | sh && chmod +x eget && mv eget /usr/local/bin/eget
 [[ ! -f /usr/local/bin/mediamtx ]] && eget bluenviron/mediamtx --to=/usr/local/bin && ln -svf /usr/local/bin/mediamtx $HOME/.local/bin
-[[ ! -f /usr/bin/sunshine ]] && eget LizardByte/Sunshine -a '24.04' --to=./sunshine.deb
-[[ ! -f /usr/bin/rotz ]] && eget volllly/rotz --to=/usr/local/bin -a gnu.zip
+#[[ ! -f /usr/bin/sunshine ]] && eget LizardByte/Sunshine -a '24.04' --to=./sunshine.deb
+[[ ! -f /usr/local/bin/rotz ]] && eget volllly/rotz --to=/usr/local/bin -a gnu.zip
 
 #============================================= Clone our core repos from gitee
 mkdir -p "$HOME/Code"

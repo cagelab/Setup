@@ -32,6 +32,12 @@ sudo mkdir -p /usr/local/bin /usr/local/etc
 sudo chown -R "$USER":"$USER" /usr/local/bin || true
 sudo chown -R "$USER":"$USER" /usr/local/etc || true
 
+# PTB expects libglut.so.3 but this is not present in Ubuntu 24.04 and later.
+# The following line creates a symlink to the libglut.so.3.12.0 file, which is the version available in Ubuntu 24.04 and later.
+# This allows PTB to find the library it needs to function correctly.
+[[ -f "/usr/lib/x86_64-linux-gnu/libglut.so.3.12.0" ]] && 
+	sudo ln -svf /usr/lib/x86_64-linux-gnu/libglut.so.3.12.0 /usr/lib/x86_64-linux-gnu/libglut.so.3
+
 # link some cagelab stuff
 ln -sfv "$SPATH/config/toggleInput" "/usr/local/bin"
 ln -sfv "$SPATH/config/mediamtx.yml" "/usr/local/etc"
