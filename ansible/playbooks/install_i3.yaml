@@ -1,15 +1,20 @@
----
-- name: Install i3 Window Manager
-  hosts: all
-  become: true
+--- 
+# i3 Window Manager installation playbook 
+# This playbook installs the i3 window manager from the sur5r repository, 
+# along with related tools like nitrogen and rofi. i3 as an uncomposited X11
+# desktop can fix some issues with PTB, and you can remove all
+# touchable/clickable GUI to minimise subects altering some OS functions. -
+- name: Install i3 Window Manager 
+  hosts: all 
+  become: true 
   gather_facts: true
 
   tasks:
     - name: Download sur5r keyring deb
       ansible.builtin.get_url:
-        url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2025.03.09_all.deb
+        url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2025.12.14_all.deb keyring.deb
         dest: /tmp/sur5r-keyring.deb
-        checksum: sha256:2c2601e6053d5c68c2c60bcd088fa9797acec5f285151d46de9c830aaba6173c
+        checksum: sha256:2c816fbd12ea4d84811818aed0ce3a5da589be1afa30833eb32abc1e4fe6349e
         mode: '0644'
 
     - name: Install sur5r keyring

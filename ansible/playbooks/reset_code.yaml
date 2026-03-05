@@ -1,4 +1,7 @@
 ---
+# Ansible playbook to force reset CageLab code repositories to their latest
+# upstream state. If you don't do this, uncommitted changes or local branches
+# will prevent updates and this machine dependent variance is hard to debug.
 - name: Reset CageLab Code Repositories
   hosts: all
   gather_facts: false

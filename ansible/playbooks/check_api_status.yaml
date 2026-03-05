@@ -1,4 +1,6 @@
 ---
+# Ansible playbook to check the status of the cogmoteGO API and retrieve
+# default broadcast data if running
 - name: Check cogmoteGO API Status
   hosts: all
   gather_facts: true

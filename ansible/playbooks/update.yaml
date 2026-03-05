@@ -1,5 +1,14 @@
 ---
 # For help, check out https://www.redhat.com/en/topics/automation/what-is-an-ansible-playbook
+# Ansible playbook to update CageLab software and related tools
+# This playbook performs the following actions:
+# - Checks if CageLab is currently running an experiment; if so, it skips the update
+# - Ensures necessary directories and permissions are set
+# - Updates system packages and installs required tools
+# - Updates various CageLab-related code repositories
+# - Installs or updates cogmoteGO and pixi tools
+# - Installs or updates eget and mediamtx tools
+# - Ensures OBS Studio is installed via flatpak
 - name: Update CageLab Software
   hosts: "{{ target | default('cagelab') }}"
   gather_facts: true
