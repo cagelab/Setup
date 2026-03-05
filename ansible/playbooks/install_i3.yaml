@@ -12,7 +12,7 @@
   tasks:
     - name: Download sur5r keyring deb
       ansible.builtin.get_url:
-        url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2025.12.14_all.deb keyring.deb
+        url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2025.12.14_all.deb
         dest: /tmp/sur5r-keyring.deb
         checksum: sha256:2c816fbd12ea4d84811818aed0ce3a5da589be1afa30833eb32abc1e4fe6349e
         mode: '0644'
