@@ -7,7 +7,7 @@
   become: true
   gather_facts: true
   vars:
-    autologin_user: '{{ ansible_user | default(ansible_user_id) }}'
+    autologin_user: '{{ ansible_user | default(ansible_facts["user_id"]) }}'
     lightdm_config_path: /etc/lightdm/lightdm.conf.d/50-autologin.conf
 
   tasks:
