@@ -91,10 +91,12 @@ if [ "$PLATFORM" = "Linux" ]; then
 	sudo apt -my install snapd
 	sudo apt -my install openjdk-21-jre
 	sudo apt -my install flatpak
-	sudo apt -my install wakeonlan etherwake xdotool
+	sudo apt -my install wakeonlan etherwake
 	sudo apt -my install python3-pip python3-venv
+	sudo snap install core
+	sudo snap install starship --edge
 
-	# get i3 desktop manager
+	# get update i3 desktop manager
 	"$SPATH/config/geti3.sh"
 
 	# Install snap packages

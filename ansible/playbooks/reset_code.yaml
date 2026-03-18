@@ -3,45 +3,42 @@
 # upstream state. If you don't do this, uncommitted changes or local branches
 # will prevent updates and this machine dependent variance is hard to debug.
 - name: Reset CageLab Code Repositories
-  hosts: all
-  gather_facts: false
+  hosts: "{{ target | default('all') }}"
+  gather_facts: true
   ignore_unreachable: true
 
   vars:
-    repositories: # List of repositories to update
-      - ~/Code/Psychtoolbox
-      - ~/Code/opticka
-      - ~/Code/CageLab
-      - ~/Code/Setup
-      - ~/Code/matmoteGO
-      - ~/Code/PTBSimia
-      - ~/Code/matlab-jzmq
-      - ~/Code/PacmanTask
-      - ~/.dotfiles
+    repositories: # List of repositories to reset and update
+      - { path: '~/Code/Setup', url: 'https://gitee.com/CogPlatform/Setup.git' }
+      - { path: '~/Code/CageLab', url: 'https://gitee.com/CogPlatform/CageLab.git' }
+      - { path: '~/Code/Psychtoolbox', url: 'https://gitee.com/CogPlatform/Psychtoolbox.git' }
+      - { path: '~/Code/opticka', url: 'https://gitee.com/CogPlatform/opticka.git' }
+      - { path: '~/Code/matmoteGO', url: 'https://gitee.com/CogPlatform/matmoteGO.git' }
+      - { path: '~/Code/PTBSimia', url: 'https://gitee.com/CogPlatform/PTBSimia.git' }
+      - { path: '~/Code/matlab-jzmq', url: 'https://gitee.com/CogPlatform/matlab-jzmq.git' }
+      - { path: '~/Code/PacmanTask', url: 'https://gitee.com/CogPlatform/PacmanTask.git' }
+      - { path: '~/.dotfiles', url: 'https://codeberg.org/iandol/dotfiles.git' }
 
   tasks:
     - name: Reset and update repositories
-      ansible.builtin.shell: |
-        if [[ -d "{{ item }}" && -d "{{ item }}/.git" ]]; then
-          echo ">>> Resetting {{ item }}"
-          cd "{{ item }}"
-          git fetch --all --prune
-          upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
-          if [[ -n $upstream ]]; then
-            git reset --hard $upstream
-          else
-            git reset --hard
-          fi
-          git clean -fdx
-          git pull --force --all --prune
-        else
-          echo ">>> Skipping {{ item }} (not a git repo or does not exist)"
-        fi
-      args:
-        executable: /bin/zsh
+      ansible.builtin.git:
+        repo: "{{ item.url }}"
+        dest: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+        version: 'HEAD'
+        force: true
+        accept_hostkey: true
+      environment:
+        GIT_TERMINAL_PROMPT: '0'
       loop: "{{ repositories }}"
-      register: repo_update
-      changed_when: "'Updating' in repo_update.stdout or 'bject' in repo_update.stdout"
-      # The changed_when condition is approximate since git output varies.
-      # We could just set it to 'true' if we assume this is always an action.
-      # But usually git output contains keys when something happens.
+
+    - name: Clean untracked files from repositories
+      ansible.builtin.command:
+        argv:
+          - git
+          - clean
+          - -fdx
+      args:
+        chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      loop: "{{ repositories }}"
+      register: repo_clean
+      changed_when: repo_clean.stdout != ''
