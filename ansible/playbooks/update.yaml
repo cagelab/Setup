@@ -74,14 +74,14 @@
       ansible.builtin.apt:
         update_cache: true
       become: true
-      ignore_errors: true
+      failed_when: false
 
     - name: Make sure git/curl etc. are installed
       ansible.builtin.apt:
         name: [curl, git, tmux, tmuxp, flatpak]
         state: present
       become: true
-      ignore_errors: true
+      failed_when: false
 
     # ensure all our code repos are force pulled to latest
     - name: Reset and update repositories
@@ -90,6 +90,7 @@
         dest: "{{ item.path }}"
         version: "HEAD"
         force: true
+        recursive: true
         accept_hostkey: true
       environment:
         GIT_TERMINAL_PROMPT: "0"
@@ -223,7 +224,7 @@
       ansible.builtin.command: "eget bluenviron/mediamtx --upgrade-only --to=/usr/local/bin"
       register: update_mediamtx
       changed_when: true
-      ignore_errors: true 
+      ignore_errors: true
 
     - name: Add flathub repository
       ansible.builtin.command: "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"

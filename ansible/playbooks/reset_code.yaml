@@ -21,7 +21,7 @@
 
   tasks:
     - name: Reset and update repositories
-      ansible.builtin.git:
+      ansible.builtin.git: # noqa latest[git]
         repo: "{{ item.url }}"
         dest: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
         version: 'HEAD'
@@ -30,6 +30,66 @@
       environment:
         GIT_TERMINAL_PROMPT: '0'
       loop: "{{ repositories }}"
+
+    - name: Synchronize submodule URLs in repositories
+      ansible.builtin.command:
+        argv:
+          - git
+          - submodule
+          - sync
+          - --recursive
+      args:
+        chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      environment:
+        GIT_TERMINAL_PROMPT: '0'
+      loop: "{{ repositories }}"
+      changed_when: false
+
+    - name: Reset tracked files in submodules
+      ansible.builtin.command:
+        argv:
+          - git
+          - submodule
+          - foreach
+          - --recursive
+          - git
+          - reset
+          - --hard
+      args:
+        chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      loop: "{{ repositories }}"
+      changed_when: false
+
+    - name: Clean untracked files from submodules
+      ansible.builtin.command:
+        argv:
+          - git
+          - submodule
+          - foreach
+          - --recursive
+          - git
+          - clean
+          - -fdx
+      args:
+        chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      loop: "{{ repositories }}"
+      changed_when: false
+
+    - name: Initialize and update submodules in repositories
+      ansible.builtin.command:
+        argv:
+          - git
+          - submodule
+          - update
+          - --init
+          - --force
+          - --recursive
+      args:
+        chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      environment:
+        GIT_TERMINAL_PROMPT: '0'
+      loop: "{{ repositories }}"
+      changed_when: false
 
     - name: Clean untracked files from repositories
       ansible.builtin.command:

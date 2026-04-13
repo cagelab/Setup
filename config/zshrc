@@ -41,7 +41,7 @@ for j in $jl; do
 	fi
 done
 
-ul=("R2025b" "R2025a" "R2024b" "R2024a" "R2023b" "R2023a" "R2022b" "R2022a" "R2021b" "R2021a" "R2020b" "R2020a")
+ul=("R2026b" "R2026a" "R2025b" "R2025a" "R2024b" "R2024a" "R2023b" "R2023a" "R2022b" "R2022a")
 if [[ $PLATFORM == 'Darwin' ]]; then
 	for x in $ul; do
 		if [[ -d "/Applications/MATLAB_${x}.app/bin" ]]; then
