@@ -25,6 +25,7 @@ Host cog21
 	User cog
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+# cagelab
 Host cagelab-dev
 	HostName cagelab-dev.cloud.lab
 	User cagelab
@@ -60,6 +61,22 @@ Host cagelab-006
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+Host cagelab-030
+	HostName cagelab-030.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+Host cagelab-031
+	HostName cagelab-031.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+Host cagelab-032
+	HostName cagelab-032.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+### PACMAN
 Host pacman-001
 	HostName pacman-001.cloud.lab
 	User cagelab
@@ -85,6 +102,7 @@ Host pacman-005
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+### CAGELAB IP
 Host cagelab-001i
 	HostName 192.168.3.11
 	User cagelab
@@ -115,6 +133,7 @@ Host cagelab-006i
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+### PACMAN IP
 Host pacman-001i
 	HostName 192.168.3.21
 	User cagelab
@@ -140,6 +159,7 @@ Host pacman-005i
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+### PRISYS
 Host prisys-alyx
 	HostName prisys-alyx.cloud.lab
 	User prisys
@@ -195,15 +215,23 @@ Host prisys-005i
 	User prisys
 	IdentityFile ~/.ssh/prisys
 	IdentitiesOnly yes
+### Git repos
+Host gitee.com
+	Hostname gitee.com
+	IdentityFile ~/.ssh/gitrepo3
+	IdentitiesOnly yes 
+	AddKeysToAgent yes
 Host github.com
 	HostName github.com
 	User git
 	IdentityFile ~/.ssh/gitrepo2
 	IdentitiesOnly yes
+	AddKeysToAgent yes
 Host codeberg.org
 	HostName codeberg.org
 	User git
 	IdentityFile ~/.ssh/gitrepo
 	IdentitiesOnly yes
+	AddKeysToAgent yes
 Host instances.cogplatform.cc/001
 	ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
