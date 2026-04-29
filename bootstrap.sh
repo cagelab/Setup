@@ -88,6 +88,7 @@ if [ "$PLATFORM" = "Linux" ]; then
 	sudo apt -my install libunrar5 libdc1394-25 libraw1394-11
 	sudo apt -my install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
 	sudo apt -my install synaptic zathura zathura-pdf-poppler zathura-ps
+	sudo apt -my install tmux tmuxp
 	sudo apt -my install snapd
 	sudo apt -my install openjdk-21-jre
 	sudo apt -my install flatpak

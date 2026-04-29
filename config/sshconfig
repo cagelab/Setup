@@ -1,36 +1,50 @@
 # Shared configuration for all CAGELAB systems
-# link this to ~/.ssh/config
+# symlink this to ~/.ssh/config
+# lssh can also read this file
+###================================= ADMIN
 Host cog5
 	HostName cog5.cloud.lab
 	User cog5
 	IdentityFile ~/.ssh/id_rsa
 	IdentitiesOnly yes
+	#!! GroupLabels admin
+	#!! EnableOSC52 yes
 Host cog12
 	HostName cog12.cloud.lab
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+	#!! GroupLabels admin
+	#!! EnableOSC52 yes
 Host cog12i
 	HostName 192.168.3.66
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+	#!! GroupLabels admin
+	#!! EnableOSC52 yes
 Host win420
 	HostName 192.168.3.99
 	User cog
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
-Host cog21
+	#!! GroupLabels admin
+	#!! EnableOSC52 yes
+ Host cog21
 	HostName cog21.cloud.lab
 	User cog
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
+	#!! GroupLabels admin
+	#!! EnableOSC52 yes
 Host cagelab-030
 	HostName cagelab-030.cloud.lab
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
-# cagelab
+	#!! GroupLabels admin
+	#!! EnableOSC52 yes
+###================================= CAGELAB
 Host cagelab-dev
 	HostName cagelab-dev.cloud.lab
 	User cagelab
@@ -81,33 +95,7 @@ Host cagelab-032
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
-### PACMAN
-Host pacman-001
-	HostName pacman-001.cloud.lab
-	User cagelab
-	IdentityFile ~/.ssh/cagelab
-	IdentitiesOnly yes
-Host pacman-002
-	HostName pacman-002.cloud.lab
-	User cagelab
-	IdentityFile ~/.ssh/cagelab
-	IdentitiesOnly yes
-Host pacman-003
-	HostName pacman-003.cloud.lab
-	User cagelab
-	IdentityFile ~/.ssh/cagelab
-	IdentitiesOnly yes
-Host pacman-004
-	HostName pacman-004.cloud.lab
-	User cagelab
-	IdentityFile ~/.ssh/cagelab
-	IdentitiesOnly yes
-Host pacman-005
-	HostName pacman-005.cloud.lab
-	User cagelab
-	IdentityFile ~/.ssh/cagelab
-	IdentitiesOnly yes
-### CAGELAB IP
+###=================================CAGELAB IP
 Host cagelab-001i
 	HostName 192.168.3.11
 	User cagelab
@@ -153,7 +141,33 @@ Host cagelab-032i
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
-### PACMAN IP
+##================================= PACMAN
+Host pacman-001
+	HostName pacman-001.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+Host pacman-002
+	HostName pacman-002.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+Host pacman-003
+	HostName pacman-003.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+Host pacman-004
+	HostName pacman-004.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+Host pacman-005
+	HostName pacman-005.cloud.lab
+	User cagelab
+	IdentityFile ~/.ssh/cagelab
+	IdentitiesOnly yes
+##================================= PACMAN IP
 Host pacman-001i
 	HostName 192.168.3.21
 	User cagelab
@@ -179,7 +193,7 @@ Host pacman-005i
 	User cagelab
 	IdentityFile ~/.ssh/cagelab
 	IdentitiesOnly yes
-### PRISYS
+##================================= PRISYS
 Host prisys-alyx
 	HostName prisys-alyx.cloud.lab
 	User prisys
@@ -235,7 +249,7 @@ Host prisys-005i
 	User prisys
 	IdentityFile ~/.ssh/prisys
 	IdentitiesOnly yes
-### Git repos
+##================================= Git repos
 Host gitee.com
 	Hostname gitee.com
 	IdentityFile ~/.ssh/gitrepo3
