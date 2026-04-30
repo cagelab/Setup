@@ -8,7 +8,7 @@
   ignore_unreachable: false
 
   vars:
-    chrony_master_ip: "10.20.32.186"
+    chrony_master_ip: "10.10.47.122"
     chrony_conf_path: /etc/chrony/chrony.conf
 
   tasks:
