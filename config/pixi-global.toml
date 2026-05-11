@@ -144,3 +144,13 @@ exposed = { bat = "bat" }
 channels = ["conda-forge"]
 dependencies = { btop = "*" }
 exposed = { btop = "btop" }
+
+[envs.tssh]
+channels = ["conda-forge"]
+dependencies = { tssh = "*" }
+exposed = { tssh = "tssh" }
+
+[envs.tsshd]
+channels = ["conda-forge"]
+dependencies = { tsshd = "*" }
+exposed = { tsshd = "tsshd" }
