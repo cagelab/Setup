@@ -1,12 +1,12 @@
---- 
-# i3 Window Manager installation playbook 
-# This playbook installs the i3 window manager from the sur5r repository, 
+---
+# i3 Window Manager installation playbook
+# This playbook installs the i3 window manager from the sur5r repository,
 # along with related tools like nitrogen and rofi. i3 as an uncomposited X11
 # desktop can fix some issues with PTB, and you can remove all
-# touchable/clickable GUI to minimise subects altering some OS functions. -
-- name: Install i3 Window Manager 
-  hosts: all 
-  become: true 
+# touchable/clickable GUI to minimise subjects altering some OS functions.
+- name: Install i3 Window Manager
+  hosts: all
+  become: true
   gather_facts: true
 
   tasks:

@@ -12,19 +12,20 @@
       ansible.builtin.apt:
         name: wakeonlan
         state: present
-        update_cache: yes
+        update_cache: true
       when: ansible_os_family == "Debian"
       become: true
-      ignore_errors: true # Fail gracefully if not on Debian/Ubuntu or no sudo rights
+      failed_when: false
 
     - name: Send Wake-on-LAN magic packet
       ansible.builtin.command:
         cmd: "wakeonlan {{ hostvars[item]['mac_address'] }}"
       loop: "{{ groups[wol_group] }}"
-      when: 
+      when:
         - hostvars[item]['mac_address'] is defined
       register: wol_result
-      changed_when: wol_result.rc == 0
+      # Sending WoL packet is always a change; per-item rc not available with loops.
+      changed_when: true
 
     - name: Report missing MAC addresses
       ansible.builtin.debug:

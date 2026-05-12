@@ -73,6 +73,6 @@
           - up
           - --setup-key
           - '{{ netbird_setup_key }}'
-      changed_when: netbird_up_result.rc == 0
       register: netbird_up_result
+      changed_when: netbird_up_result.rc == 0
       when: netbird_setup_key | length > 0

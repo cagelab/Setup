@@ -30,7 +30,7 @@
         line: 'addOptickaToPath;'
         state: present
 
-    - name: Add addOptickaToPath to startup.m
+    - name: Change VisualDebugLevel
       ansible.builtin.lineinfile:
         path: '{{ ansible_env.HOME }}/Documents/MATLAB/startup.m'
         line: 'Screen(''Preference'', ''VisualDebugLevel'', 3);'

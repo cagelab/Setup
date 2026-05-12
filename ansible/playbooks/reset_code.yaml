@@ -29,6 +29,8 @@
         accept_hostkey: true
       environment:
         GIT_TERMINAL_PROMPT: '0'
+      async: 300
+      poll: 10
       loop: "{{ repositories }}"
 
     - name: Synchronize submodule URLs in repositories
@@ -57,6 +59,8 @@
           - --hard
       args:
         chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      environment:
+        GIT_TERMINAL_PROMPT: '0'
       loop: "{{ repositories }}"
       changed_when: false
 
@@ -72,6 +76,8 @@
           - -fdx
       args:
         chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
+      environment:
+        GIT_TERMINAL_PROMPT: '0'
       loop: "{{ repositories }}"
       changed_when: false
 
@@ -88,6 +94,8 @@
         chdir: "{{ item.path | regex_replace('^~', ansible_facts['user_dir']) }}"
       environment:
         GIT_TERMINAL_PROMPT: '0'
+      async: 300
+      poll: 10
       loop: "{{ repositories }}"
       changed_when: false
 

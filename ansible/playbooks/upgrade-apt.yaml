@@ -10,8 +10,12 @@
       ansible.builtin.apt:
         update_cache: true
       become: true
+      environment:
+        DEBIAN_FRONTEND: noninteractive
 
     - name: Upgrade all apt packages to latest version
       ansible.builtin.apt:
         upgrade: full
       become: true
+      environment:
+        DEBIAN_FRONTEND: noninteractive
