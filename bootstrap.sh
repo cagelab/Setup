@@ -1,7 +1,7 @@
 #!/bin/bash
 export PLATFORM=$(uname)
 export ARCH=$(uname -m)
-export SPATH="$HOME/Code/Setup"
+export SPATH="$HOME/Code/CageLab-Code/setup"
 uname -a | grep -iq "microsoft" && MOD="WSL"
 uname -a | grep -iq "aarch64|armv7" && MOD="RPi"
 PLATFORM=$(uname -s)$MOD
@@ -12,8 +12,8 @@ else
 	mpath="/usr/local/MATLAB/$mversion/bin/matlab"
 fi
 
-sudo apt install git
-sudo apt install curl
+sudo apt -my install git
+sudo apt -my install curl
 
 printf "\n\n--->>> Bootstrap terminal %s setup, current directory is %s\n\n" "$SHELL" "$SPATH"
 printf '\e[36m'
@@ -132,7 +132,7 @@ cd "$HOME/Code" || exit
 [[ ! -d 'Setup' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/Setup.git
 [[ ! -d 'Psychtoolbox' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/Psychtoolbox.git
 [[ ! -d 'opticka' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/opticka.git
-[[ ! -d 'CageLab' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/CageLab.git
+[[ ! -d 'CageLab-Code' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/CageLab-Code.git
 [[ ! -d 'matlab-jzmq' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/matlab-jzmq.git
 [[ ! -d 'matmoteGO' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/matmoteGO.git
 [[ ! -d 'PTBSimia' ]] && git clone --recurse-submodules https://gitee.com/CogPlatform/PTBSimia.git
